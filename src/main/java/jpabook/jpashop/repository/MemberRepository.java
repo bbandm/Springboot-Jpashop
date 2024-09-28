@@ -3,16 +3,19 @@ package jpabook.jpashop.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jpabook.jpashop.domain.Member;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 //데이터베이스와 상호작용하는 레포지토리임을 나타냄
 //스프링이 이 클래스를 감지하고 bean으로 등록
 public class MemberRepository {
 
-    @PersistenceContext
+    @Autowired
     //JPA의 EntityManager(JPA에서 데베와의 상호작용 담당하는 객체)를 주입받기 위한 애노테이션
     //이 객체를 통해 데이터베이스와의 상호작용 처리
     private EntityManager em;

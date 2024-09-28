@@ -3,23 +3,24 @@ package jpabook.jpashop.service;
 import jakarta.transaction.Transactional;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@Transactional//(readOnly = true)
+@Transactional
+@RequiredArgsConstructor
 public class MemberService {
 
-    @Autowired
-    MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     // 회원가입
     @Transactional
     public Long join(Member member) {
 
-        validateDuplicateMember(member);
+        validateDuplicateMember(member); // 중복 회원 검증
         memberRepository.save(member);
         return member.getId();
     }
